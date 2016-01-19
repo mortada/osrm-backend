@@ -20,6 +20,7 @@ struct PhantomNode
     PhantomNode(NodeID forward_node_id,
                 NodeID reverse_node_id,
                 unsigned name_id,
+                unsigned reverse_name_id,
                 int forward_weight,
                 int reverse_weight,
                 int forward_offset,
@@ -94,6 +95,7 @@ struct PhantomNode
         forward_node_id = other.forward_edge_based_node_id;
         reverse_node_id = other.reverse_edge_based_node_id;
         name_id = other.name_id;
+        reverse_name_id = other.reverse_name_id;
 
         forward_weight = other.forward_weight;
         reverse_weight = other.reverse_weight;
@@ -116,6 +118,7 @@ struct PhantomNode
     NodeID forward_node_id;
     NodeID reverse_node_id;
     unsigned name_id;
+    unsigned reverse_name_id;
     int forward_weight;
     int reverse_weight;
     int forward_offset;
@@ -139,7 +142,7 @@ struct PhantomNode
 };
 
 #ifndef _MSC_VER
-static_assert(sizeof(PhantomNode) == 48, "PhantomNode has more padding then expected");
+static_assert(sizeof(PhantomNode) == 52, "PhantomNode has more padding then expected");
 #endif
 
 using PhantomNodePair = std::pair<PhantomNode, PhantomNode>;
@@ -168,6 +171,7 @@ inline std::ostream &operator<<(std::ostream &out, const PhantomNode &pn)
     out << "node1: " << pn.forward_node_id << ", "
         << "node2: " << pn.reverse_node_id << ", "
         << "name: " << pn.name_id << ", "
+        << "Rev-name: " << pn.reverse_name_id << ", "
         << "fwd-w: " << pn.forward_weight << ", "
         << "rev-w: " << pn.reverse_weight << ", "
         << "fwd-o: " << pn.forward_offset << ", "

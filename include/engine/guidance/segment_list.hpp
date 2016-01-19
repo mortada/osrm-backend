@@ -114,7 +114,7 @@ SegmentList<DataFacadeT>::SegmentList(const InternalRouteResult &raw_route,
                                               : source_phantom.forward_travel_mode);
                     const bool constexpr IS_NECESSARY = true;
                     const bool constexpr IS_VIA_LOCATION = true;
-                    segments.emplace_back(source_phantom.location, source_phantom.name_id, 0, 0.f,
+                    segments.emplace_back(source_phantom.location, traversed_in_reverse ? source_phantom.reverse_name_id : source_phantom.name_id, 0, 0.f,
                                           extractor::TurnInstruction::UTurn, IS_NECESSARY,
                                           IS_VIA_LOCATION, travel_mode);
                 }
@@ -142,7 +142,7 @@ void SegmentList<DataFacadeT>::InitRoute(const PhantomNode &node, const bool tra
     const auto travel_mode =
         (traversed_in_reverse ? node.backward_travel_mode : node.forward_travel_mode);
 
-    AppendSegment(node.location, PathData(0, node.name_id, extractor::TurnInstruction::HeadOn,
+    AppendSegment(node.location, PathData(0, traversed_in_reverse ? node.reverse_name_id : node.name_id, extractor::TurnInstruction::HeadOn,
                                           segment_duration, travel_mode));
 }
 
@@ -164,7 +164,7 @@ void SegmentList<DataFacadeT>::AddLeg(const std::vector<PathData> &leg_data,
         (traversed_in_reverse ? target_node.backward_travel_mode : target_node.forward_travel_mode);
     const bool constexpr IS_NECESSARY = true;
     const bool constexpr IS_VIA_LOCATION = true;
-    segments.emplace_back(target_node.location, target_node.name_id, segment_duration, 0.f,
+    segments.emplace_back(target_node.location, traversed_in_reverse ? target_node.reverse_name_id : target_node.name_id, segment_duration, 0.f,
                           is_via_leg ? extractor::TurnInstruction::ReachViaLocation
                                      : extractor::TurnInstruction::NoTurn,
                           IS_NECESSARY, IS_VIA_LOCATION, travel_mode);
