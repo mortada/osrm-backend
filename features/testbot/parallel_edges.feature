@@ -18,11 +18,11 @@ Feature: Oneway Roundabout
             | dgb   | yes    |
 
         When I route I should get
-            | waypoints | route   |
-            | a,f | ab,bcd,df |
-            | f,a | df,dgb,ab |
-            | b,d | bcd |
-            | d,b | dgb |
+            | waypoints | route     |
+            | a,f       | ab,bcd,df |
+            | f,a       | df,dgb,ab |
+            | b,d       | bcd       |
+            | d,b       | dgb       |
 
     Scenario: Parallel Geometry
         Given the node map
@@ -36,11 +36,11 @@ Feature: Oneway Roundabout
             | dgb   | yes    |
 
         When I route I should get
-            | waypoints | route   |
-            | a,f | ab,bcd,df |
-            | f,a | df,dgb,ab |
-            | b,d | bcd |
-            | d,b | dgb |
+            | waypoints | route     |
+            | a,f       | ab,bcd,df |
+            | f,a       | df,dgb,ab |
+            | b,d       | bcd       |
+            | d,b       | dgb       |
 
      Scenario: Parallel Geometry
         Given the node map
@@ -53,19 +53,19 @@ Feature: Oneway Roundabout
 
         When I route I should get
             | waypoints | route   | time |
-            | a,b | ab | 10s |
-            | b,a | ba | 30s |
+            | a,b       | ab      | 10s  |
+            | b,a       | ba      | 30s  |
 
      Scenario: Parallel Geometry
         Given the node map
             | a | b |
 
         And the ways
-            | nodes | oneway | highway |
+            | nodes | oneway | highway  |
             | ba    | yes    | tertiary |
-            | ab    | yes    | primary |
+            | ab    | yes    | primary  |
 
         When I route I should get
             | waypoints | route   | time |
-            | a,b | ab | 10s |
-            | b,a | ba | 30s |
+            | a,b       | ab      | 10s  |
+            | b,a       | ba      | 30s  |
