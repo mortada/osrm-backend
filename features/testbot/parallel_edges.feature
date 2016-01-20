@@ -69,3 +69,31 @@ Feature: Oneway Roundabout
             | waypoints | route   | time |
             | a,b       | ab      | 10s  |
             | b,a       | ba      | 30s  |
+
+     Scenario: Parallel Geometry Contractable
+        Given the node map
+            | a | b | c | d | e | f | g |
+
+        And the ways
+            | nodes | oneway | highway  |
+            | gf    | yes    | tertiary |
+            | fe    | yes    | tertiary |
+            | ed    | yes    | tertiary |
+            | dc    | yes    | tertiary |
+            | cb    | yes    | tertiary |
+            | ba    | yes    | tertiary |
+            | ab    | yes    | primary  |
+            | bc    | yes    | primary  |
+            | cd    | yes    | primary  |
+            | de    | yes    | primary  |
+            | ef    | yes    | primary  |
+            | fg    | yes    | primary  |
+
+        When I route I should get
+            | waypoints | route             | time |
+            | a,b       | ab                | 10s  |
+            | a,g       | ab,bc,cd,de,ef,fg | 60s  |
+            | b,a       | ba                | 30s  |
+            | g,a       | gf,fe,ed,dc,cb,ba | 180s |
+            | b,f       | bc,cd,de,ef       | 40s  |
+            | f,b       | fe,ed,dc,cb       | 120s |
