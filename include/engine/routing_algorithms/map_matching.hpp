@@ -240,7 +240,7 @@ class MapMatching final : public BasicRoutingInterface<DataFacadeT, MapMatching<
                                                        prev_viterbi[s], emission_pr, transition_pr,
                                                        network_distance, haversine_distance);
 
-                    if (new_value > current_viterbi[s_prime])
+                    if (new_value > current_viterbi[s_prime] || (new_value == current_viterbi[s_prime] && s == s_prime) )
                     {
                         current_viterbi[s_prime] = new_value;
                         current_parents[s_prime] = std::make_pair(prev_unbroken_timestamp, s);

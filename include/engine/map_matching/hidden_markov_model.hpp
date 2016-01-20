@@ -95,7 +95,7 @@ template <class CandidateLists> struct HiddenMarkovModel
         for (const auto t : util::irange(initial_timestamp, viterbi.size()))
         {
             std::fill(viterbi[t].begin(), viterbi[t].end(), IMPOSSIBLE_LOG_PROB);
-            std::fill(parents[t].begin(), parents[t].end(), std::make_pair(0u, 0u));
+            std::fill(parents[t].begin(), parents[t].end(), std::make_pair(0u, 0));
             std::fill(path_lengths[t].begin(), path_lengths[t].end(), 0);
             std::fill(suspicious[t].begin(), suspicious[t].end(), true);
             std::fill(pruned[t].begin(), pruned[t].end(), true);

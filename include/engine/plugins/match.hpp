@@ -166,10 +166,16 @@ template <class DataFacadeT> class MapMatchingPlugin : public BasePlugin
                     {
                         PhantomNode reverse_node(candidates[i].phantom_node);
                         reverse_node.forward_node_id = SPECIAL_NODEID;
+                        reverse_node.name_id = reverse_node.reverse_name_id;
                         candidates.push_back(
                             PhantomNodeWithDistance{reverse_node, candidates[i].distance});
 
                         candidates[i].phantom_node.reverse_node_id = SPECIAL_NODEID;
+                    }
+                    else if (candidates[i].phantom_node.forward_node_id == SPECIAL_NODEID)
+                    {
+                        candidates[i].phantom_node.name_id =
+                            candidates[i].phantom_node.reverse_name_id;
                     }
                 }
             }
